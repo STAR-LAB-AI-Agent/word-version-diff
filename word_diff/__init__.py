@@ -12,7 +12,7 @@
     docx_reader   读取 .docx 的薄适配层（唯一依赖 python-docx 处）
     reporting     结果组装 / 摘要 / 输出
     cli           命令行入口
-    advanced      进阶分析（格式 / 图片 / 批注），按需启用，节省 Token
+    advanced      进阶分析（格式 / 图片 / 批注 / 空段落），按需启用，节省 Token
 """
 from .models import DiffItem, DiffResult, ParagraphEntry
 from .diff_engine import compute_diff, collect_paragraphs, DEFAULT_SIMILARITY_THRESHOLD
@@ -33,4 +33,4 @@ __all__ = [
     "validate_docx_path",
 ]
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"

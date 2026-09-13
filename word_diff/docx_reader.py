@@ -19,8 +19,8 @@ from .models import ParagraphEntry
 def _vendor_site() -> str | None:
     """返回项目根下 vendor/ 目录的绝对路径（若存在）。
 
-    若全局未安装 python-docx，可自动降级到 vendor/（由 bootstrap_env.py 生成），
-    从而让 word_diff 在本环境开箱即用。
+    若环境里未安装 python-docx，而项目根下恰好存在 vendor/ 目录，
+    则把它加入 sys.path 作为兜底（用于离线环境；正常 pip 安装依赖时不会走到这里）。
     """
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     vendor = os.path.join(root, "vendor")
@@ -45,8 +45,8 @@ def _require_docx() -> None:
             pass
 
     raise RuntimeError(
-        "缺少 python-docx 依赖。可执行:  pip install python-docx "
-        "或  python tests/bootstrap_env.py"
+        "缺少 python-docx 依赖。请执行:  pip install -r requirements.txt"
+        "（或  pip install python-docx）"
     )
 
 
