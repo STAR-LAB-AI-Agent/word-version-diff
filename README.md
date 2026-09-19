@@ -60,7 +60,7 @@ word_diff/
   __init__.py           包导出
   models.py             数据模型（ParagraphEntry / DiffItem / DiffResult）
   diff_engine.py        纯逻辑 diff 核心（不依赖 python-docx，可单测）
-  docx_reader.py        读取 .docx 的薄适配层（唯一依赖 python-docx 处）
+  docx_reader.py        读取 .docx 的薄适配层
   reporting.py          结果组装 / 摘要 / 输出
   advanced.py           进阶分析（格式 / 图片 / 批注 / 空段落）
   cli.py                命令行入口
@@ -190,16 +190,18 @@ python tests/run_tests.py real_documents
 
 ## 低 Token / 安全说明
 
-- `--summary` 只输出摘要与统计（默认不开 `--advanced`），避免无条件把完整差异塞进模型上下文。
+- `--summary` 只输出摘要与统计，避免无条件把完整差异塞进模型上下文。
 - 进阶分析独立成脚本/模块，默认关闭，按用户明确要求才调用。
 - 日志：脚本不输出完整文档内容到日志，仅返回结构化结果；不涉及真实密钥/敏感凭据。
 
 ## 已知问题
 
 - `python-docx` 不直接暴露段落级“删除标记（修订）”信息，本工具比较的是两份静态文档的快照差异，而非 Word 修订记录。
-- 图片内容哈希依赖 `inline_shapes` 的关系部件读取，若图片以浮动/非内联方式插入可能无法提取，此时 `hashed=false`，不参与内容比较。
+- 图片通过 `doc.inline_shapes` 读取数量与尺寸；内联图片的二进制经文档部件 `related_parts` 按关系 ID 取出后计算 MD5。**浮动（非内联）图片不在 `inline_shapes` 中**，因此不参与数量/尺寸/内容比较。
 - 批注时间字段（创建/修改时间）在 `python-docx` 中不可用，批注比较仅基于作者与内容。
 - 格式比较基于 `paragraph.runs`，**超链接内部的 run 不在其中**，因此超链接内的文字与格式不参与比较。
+- 段落文本相同、仅插入内联图片时，承载图片的 run（底层 XML 含 `<w:drawing>`）会被 `len(paragraph.runs)` 一并计入“格式片段数量”，导致 `run_structure_changes` 多报一条 `kind: "structure_change"`（`structure_count` +1）。这仅是提示项：图片 run 的 `text` 为空，逐字符格式比较与 `text_changes` 不受影响；彻底修复需在统计 run 数量时跳过含 `<w:drawing>` 的图片 run，计划后续迭代完成。
 - 表格单元格内的文字不参与比较（只比正文段落）。
 - 段落的字体名/字号若完全来自主题（`unresolved`），无法与显式设置的同值区分，此时会给出 `certainty = inheritance_unknown`；布尔属性（粗体/斜体/下划线/删除线）已按 Word 默认值兜底，不受此影响。
 - 连续多个空段落之间的增删在位置上不唯一，`blank_diff` 会给出 `position_ambiguous` + `candidates`。
+- `add_picture` 等产生的**纯图片段落没有文字**，在 `blank_paragraphs` 分析中会被计为“真空段落”（0 字符），因此在新增/删除图片时会额外出现“空段落差异”；阅读结果时需与真正的回车空行区分。

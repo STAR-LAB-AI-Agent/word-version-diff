@@ -678,16 +678,20 @@ def compare_blank_paragraphs(
 
 # ==================== 图片差异检测 ====================
 
-def _image_blob(shape) -> bytes | None:
-    """尽力从 inline_shape 提取图片二进制；读取不到返回 None。"""
+def _image_blob(shape, document_part) -> bytes | None:
+    """尽力从 inline_shape 提取图片二进制；读取不到返回 None。
+
+    说明：python-docx 的 InlineShape 没有 `.part` 属性（只有
+    _inline/height/type/width），图片部件需通过文档部件的
+    `document_part.related_parts[rId]` 解析，因此显式传入文档部件。
+    """
     try:
         blob = shape._inline.graphic.graphicData.pic.blipFill.blip
         # python-docx 不直接暴露图片二进制，这里通过 relationship 读取
         rId = blob.embed if hasattr(blob, "embed") else None
         if rId is None:
             return None
-        part = shape.part
-        image_part = part.related_parts[rId]
+        image_part = document_part.related_parts[rId]
         return image_part.blob
     except Exception:
         return None
@@ -710,7 +714,7 @@ def extract_image_info(doc_path: str) -> list[dict[str, Any]]:
             info["width_cm"] = None
             info["height_cm"] = None
 
-        blob = _image_blob(shape)
+        blob = _image_blob(shape, doc.part)
         if blob:
             info["md5"] = hashlib.md5(blob).hexdigest()
             info["hashed"] = True

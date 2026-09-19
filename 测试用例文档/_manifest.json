@@ -1,0 +1,171 @@
+{
+  "produced": {
+    "case01_add": "C:\\Users\\20948\\.nanobot\\workspace\\word_diff_verify\\cases\\case01_add.docx",
+    "case02_delete": "C:\\Users\\20948\\.nanobot\\workspace\\word_diff_verify\\cases\\case02_delete.docx",
+    "case03_modify": "C:\\Users\\20948\\.nanobot\\workspace\\word_diff_verify\\cases\\case03_modify.docx",
+    "case04_edits": "C:\\Users\\20948\\.nanobot\\workspace\\word_diff_verify\\cases\\case04_edits.docx",
+    "case05_format": "C:\\Users\\20948\\.nanobot\\workspace\\word_diff_verify\\cases\\case05_format.docx",
+    "case06_images": "C:\\Users\\20948\\.nanobot\\workspace\\word_diff_verify\\cases\\case06_images.docx",
+    "case07_comments": "C:\\Users\\20948\\.nanobot\\workspace\\word_diff_verify\\cases\\case07_comments.docx",
+    "case08_all": "C:\\Users\\20948\\.nanobot\\workspace\\word_diff_verify\\cases\\case08_all.docx",
+    "case06b_images": "C:\\Users\\20948\\.nanobot\\workspace\\word_diff_verify\\cases\\case06b_images.docx"
+  },
+  "log": [
+    {
+      "case": "case01_add",
+      "op": "在标题段后新增 1 段附加说明"
+    },
+    {
+      "case": "case01_add",
+      "op": "在 ARP 段后新增 2 段"
+    },
+    {
+      "case": "case01_add",
+      "op": "在文档末尾追加 2 段"
+    },
+    {
+      "case": "case02_delete",
+      "op": "删除第 5 段「信息技术水平是信息安全的基础和保障…」"
+    },
+    {
+      "case": "case02_delete",
+      "op": "删除第 6 段「信息技术的提升也必须以信息安全升级…」"
+    },
+    {
+      "case": "case02_delete",
+      "op": "删除 ARP 解决办法第 2、3 条"
+    },
+    {
+      "case": "case02_delete",
+      "op": "删除「SSL：」段"
+    },
+    {
+      "case": "case03_modify",
+      "op": "第 3 段：1946年第一台计算机诞生 → 1946年世界上第一台电子计算机ENIAC诞生"
+    },
+    {
+      "case": "case03_modify",
+      "op": "第 4 段：四个阶段 → 五个阶段（并微调措辞）"
+    },
+    {
+      "case": "case03_modify",
+      "op": "第 5 段（已删？）跳过；改第 7 段：数据量非常大 → 数据规模极其庞大"
+    },
+    {
+      "case": "case03_modify",
+      "op": "第 20 段：只能被用于本地网络的假冒 → 仅能被用于本地局域网的地址伪造"
+    },
+    {
+      "case": "case03_modify",
+      "op": "第 28 段：VPN象 → VPN像（错别字修正）"
+    },
+    {
+      "case": "case03_modify",
+      "op": "第 62 段：SOC 芯片描述扩充"
+    },
+    {
+      "case": "case04_edits",
+      "op": "[增] 标题后新增说明段"
+    },
+    {
+      "case": "case04_edits",
+      "op": "[删] 删除「加密方Alice将商定的密钥秘密地传递给解密方Bob。」段"
+    },
+    {
+      "case": "case04_edits",
+      "op": "[改] 第 4 段四个阶段 → 四个主要阶段"
+    },
+    {
+      "case": "case04_edits",
+      "op": "[增] 末尾追加 1 段"
+    },
+    {
+      "case": "case04_edits",
+      "op": "[删] 删除「3 设置静态ARP」段"
+    },
+    {
+      "case": "case04_edits",
+      "op": "[改] 第 71 段防火墙定义微调"
+    },
+    {
+      "case": "case05_format",
+      "op": "第 0 段「三、简答题」：粗体 True → False"
+    },
+    {
+      "case": "case05_format",
+      "op": "第 3 段 run「1946年第一台计算机诞生」：粗体 False→True、斜体 False→True"
+    },
+    {
+      "case": "case05_format",
+      "op": "第 5 段「信息技术水平是信息安全…」：下划线 False→True"
+    },
+    {
+      "case": "case05_format",
+      "op": "第 18 段「ARP攻击的原理」run：删除线 False→True"
+    },
+    {
+      "case": "case05_format",
+      "op": "第 27 段「IPSec：」：字体 宋体→黑体、字号 12→16pt"
+    },
+    {
+      "case": "case05_format",
+      "op": "第 2 段题面：斜体 False→True"
+    },
+    {
+      "case": "case06_images",
+      "op": "追加红色图片 1 张（8x8px，宽 4cm）"
+    },
+    {
+      "case": "case06_images",
+      "op": "追加蓝色图片 1 张（16x16px，宽 6cm）"
+    },
+    {
+      "case": "case06_images",
+      "op": "在标题后插入说明段（点明图片位置）"
+    },
+    {
+      "case": "case07_comments",
+      "op": "第 0 段加批注（作者=阅卷老师）"
+    },
+    {
+      "case": "case07_comments",
+      "op": "第 3 段加批注（作者=审稿人）"
+    },
+    {
+      "case": "case07_comments",
+      "op": "第 28 段加批注（作者=编辑）"
+    },
+    {
+      "case": "case08_all",
+      "op": "[增] 标题后新增说明段"
+    },
+    {
+      "case": "case08_all",
+      "op": "[删] 删除「信息技术的提升…」段"
+    },
+    {
+      "case": "case08_all",
+      "op": "[改] 第 4 段「四个阶段」→「四个主要阶段」"
+    },
+    {
+      "case": "case08_all",
+      "op": "[格式] 标题取消加粗、字号 12→14pt"
+    },
+    {
+      "case": "case08_all",
+      "op": "[格式] 「IPSec：」字体 宋体→黑体"
+    },
+    {
+      "case": "case08_all",
+      "op": "[图片] 追加红色图片 1 张"
+    },
+    {
+      "case": "case08_all",
+      "op": "[批注] 第 7 段加批注（作者=出题人）"
+    },
+    {
+      "case": "case06b_images",
+      "op": "在 case06 基础上：第 1 张图替换为绿色（内容 MD5 变）、宽度改为 5cm"
+    }
+  ]
+}

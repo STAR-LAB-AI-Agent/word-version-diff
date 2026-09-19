@@ -140,7 +140,7 @@ python word_diff.py v1.docx v2.docx --advanced
 - 判定“格式变化”用**生效值**（沿 字符样式 → 段落样式 → docDefaults 解析），`raw_*` 保留 run 上的原值；仅写法不同、渲染一致的情况归入 `style_expression_changes`。
 - `paragraph.runs` **不含超链接内部的 run**，超链接内的文字与格式不参与比较。
 - `format.count` 只统计真实格式变化；run 切分差异见 `run_structure_changes`（`structure_count`）。
-- 空段落检测基于**原始段落文本**，可区分“真空段落”与“仅含空白字符的段落”；连续多个空段落时增删位置不唯一，会给 `position_ambiguous` + `candidates` + 前后上下文。
-- 图片内容差异依赖内嵌关系部件读取，浮动图片可能无法读取（`hashed=false`）。
+- 空段落检测基于**原始段落文本**，可区分“真空段落”与“仅含空白字符的段落”；连续多个空段落时增删位置不唯一，会给 `position_ambiguous` + `candidates` + 前后上下文。纯图片段落无文字，也会被计为“真空段落”，阅读时与真实回车空行区分。
+- 图片通过 `doc.inline_shapes` 读取数量与尺寸；内联图片的二进制经文档部件 `related_parts` 取 MD5。浮动（非内联）图片不在 `inline_shapes` 中，不参与数量/尺寸/内容比较。
 - 批注比较不含时间字段（`python-docx` 限制）。
 - 结果中不输出完整文档内容，仅输出差异；建议结合 `--summary` 降低 Token。

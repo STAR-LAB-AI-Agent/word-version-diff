@@ -139,3 +139,20 @@ def test_added_image_is_detected():
         res = _pair(tmp, ["正文"], ["正文"], picture_b=png)
         assert res["images"]["changed"] is True
         assert res["images"]["image_diff"], "应给出图片差异明细"
+
+
+def test_same_count_different_image_content_is_detected():
+    """回归：图片数量相同、但内容(MD5)不同也要报差异。
+
+    对应修复前的 bug：InlineShape 没有 `.part` 属性，导致 MD5 恒为 None，
+    “数量相同、内容不同”的图片被漏报。
+    """
+    skip_if_no_docx()
+    with tempfile.TemporaryDirectory() as tmp:
+        red = make_png(Path(tmp) / "red.png", rgb=(255, 0, 0), size=3)
+        green = make_png(Path(tmp) / "green.png", rgb=(0, 255, 0), size=3)
+        res = _pair(tmp, ["正文"], ["正文"], picture_a=red, picture_b=green)
+        assert res["images"]["changed"] is True
+        assert res["images"]["doc1_count"] == res["images"]["doc2_count"] == 1
+        detail = " ".join(str(d) for item in res["images"]["image_diff"] for d in item.get("detail", []))
+        assert "MD5" in detail, "应报出“图片内容变化（MD5 不同）”"
